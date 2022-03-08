@@ -23,19 +23,19 @@ contract LionDAO is Ownable, EIP712, ERC721B {
 	// ------------------------------------------------------------------------
 	uint public MAX_LION = 999;
 	uint public STAGE_LIMIT = 333;
-	uint public PRICE = 0.9 ether;
+	uint public PRICE = 2 ether;
 	uint public numWhitelistSale = 0;
 	uint public numClaim = 0;
 	uint public numGiveaway = 0;
 	uint public totalSupply = 0;
 	bool public hasWhitelistSaleStarted = true; //
-	bool public hasClaimStarted = true; //
+	bool public hasClaimStarted = false; //
 	string private _baseTokenURI = "http://api.lion/Metadata/"; //
-	address public treasury = 0xd56e7bcF62a417b821e6cf7ee16dF7715a3e82AB; //
+	address public treasury = 0x5279246E3626Cebe71a4c181382A50a71d2A4156; //
 
-	mapping (address => uint256) public hasMint;
+	mapping (address => uint256) public hasMinted;
 
-    uint256 public whitelistSaleTimestamp = 1642410000; // 
+    uint256 public whitelistSaleTimestamp = 1646719200; // 
 
 	// Events
 	// ------------------------------------------------------------------------
@@ -45,8 +45,7 @@ contract LionDAO is Ownable, EIP712, ERC721B {
 	// ------------------------------------------------------------------------
 	constructor()
 	EIP712("LION DAO", "1.0.0")  
-	ERC721B("L", "L"){} //
-	// ERC721B("LION DAO", "LION"){}
+	ERC721B("LION DAO", "LION"){}
 
     // Modifiers
     // ------------------------------------------------------------------------
@@ -70,7 +69,7 @@ contract LionDAO is Ownable, EIP712, ERC721B {
 		require(hasClaimStarted == true, "Claim hasn't started.");
 		require(totalSupply.add(quantity) <= STAGE_LIMIT, "This stage is sold out!");
 		require(verify(maxQuantity, SIGNATURE), "Not eligible for claim.");
-		require(quantity > 0 && hasMint[msg.sender].add(quantity) <= maxQuantity, "Exceed the quantity that can be claimed");
+		require(quantity > 0 && hasMinted[msg.sender].add(quantity) <= maxQuantity, "Exceed the quantity that can be claimed");
 		require(totalSupply.add(quantity) <= MAX_LION, "Exceeds MAX_LION.");
 
 		for (uint i = 0; i < quantity; i++) {
@@ -79,7 +78,7 @@ contract LionDAO is Ownable, EIP712, ERC721B {
 		}
 
 		numClaim = numClaim.add(quantity);
-		hasMint[msg.sender] = hasMint[msg.sender].add(quantity);
+		hasMinted[msg.sender] = hasMinted[msg.sender].add(quantity);
 
 		emit mintEvent(msg.sender, quantity, totalSupply);
 	}
@@ -89,9 +88,9 @@ contract LionDAO is Ownable, EIP712, ERC721B {
 	function mintWhitelistLion(uint256 quantity, uint256 maxQuantity, bytes memory SIGNATURE) external payable onlyWhitelistSale{
 		require(totalSupply.add(quantity) <= STAGE_LIMIT, "This stage is sold out!");
 		require(verify(maxQuantity, SIGNATURE), "Not eligible for whitelist.");
-		require(quantity > 0 && hasMint[msg.sender].add(quantity) <= maxQuantity, "Exceeds max whitelist number.");
+		require(quantity > 0 && hasMinted[msg.sender].add(quantity) <= maxQuantity, "Exceeds max whitelist number.");
 		require(totalSupply.add(quantity) <= MAX_LION, "Exceeds MAX_LION.");
-		require(msg.value == PRICE.mul(quantity), "Ether value sent is below the price.");
+		require(msg.value == PRICE.mul(quantity), "Ether value sent is not equal the price.");
 
 		for (uint i = 0; i < quantity; i++) {
 			_safeMint(msg.sender, totalSupply);
@@ -99,7 +98,7 @@ contract LionDAO is Ownable, EIP712, ERC721B {
 		}
 
 		numWhitelistSale = numWhitelistSale.add(quantity);
-		hasMint[msg.sender] = hasMint[msg.sender].add(quantity);
+		hasMinted[msg.sender] = hasMinted[msg.sender].add(quantity);
 
 		emit mintEvent(msg.sender, quantity, totalSupply);
 	}
