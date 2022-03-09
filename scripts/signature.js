@@ -17,7 +17,7 @@ async function main() {
 
 	for (let i = 0; i < addressForClaim.length; i++) {
 		const domain = {
-			name: 'LION DAO',
+			name: 'LIONDAO',
 			version: '1.0.0',
 			chainId: 1,
 			verifyingContract: nftAddress

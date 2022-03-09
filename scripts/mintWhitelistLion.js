@@ -17,7 +17,7 @@ async function main() {
   let maxClaimNum = 20;
 
   const domain = {
-    name: 'LION DAO',
+    name: 'LIONDAO',
     version: '1.0.0',
     chainId: 4,
     verifyingContract: nftAddress

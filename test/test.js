@@ -50,7 +50,7 @@ describe("LionDAO", function () {
 		// 	let maxQuantity = 999;
 
 		// 	const domain = {
-		// 		name: 'LION DAO',
+		// 		name: 'LIONDAO',
 		// 		version: '1.0.0',
 		// 		chainId: 31337,
 		// 		verifyingContract: '0x668eD30aAcC7C7c206aAF1327d733226416233E2'
@@ -81,13 +81,13 @@ describe("LionDAO", function () {
 
 		it("mintWhitelistLion Function", async function () {
 
-			await contract.connect(owner).setMAX_LION(3);
+			expect(await contract.totalSupply()).to.equal(101);
 
-			let quantity = 3;
-			let maxQuantity = 999;
+			let quantity = 2;
+			let maxQuantity = 2;
 
 			const domain = {
-				name: 'LION DAO',
+				name: 'LIONDAO',
 				version: '1.0.0',
 				chainId: 31337,
 				verifyingContract: '0x668eD30aAcC7C7c206aAF1327d733226416233E2'
@@ -112,7 +112,9 @@ describe("LionDAO", function () {
 
 			signature = await owner._signTypedData(domain, types, value);
 
-			await contract.connect(addr1).mintWhitelistLion(quantity, maxQuantity, signature, {value: "6000000000000000000"});
+			await contract.connect(addr1).mintWhitelistLion(quantity, maxQuantity, signature, {value: "1600000000000000000"});
+
+			expect(await contract.totalSupply()).to.equal(103);
 
 		});
 
