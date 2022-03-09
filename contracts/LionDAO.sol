@@ -21,18 +21,17 @@ contract LionDAO is Ownable, EIP712, ERC721A {
 
 	// Sales variables
 	// ------------------------------------------------------------------------
-	uint public MAX_LION = 10000;
-	uint public STAGE_LIMIT = 434;
-	uint public PRICE = 0.8 ether;
-	uint public numWhitelistSale = 0;
-	uint public numGiveaway = 0;
+	uint256 public MAX_LION = 10000;
+	uint256 public STAGE_LIMIT = 434;
+	uint256 public PRICE = 0.8 ether;
+	uint256 public numWhitelistSale = 0;
+	uint256 public numGiveaway = 0;
+	uint256 public whitelistSaleTimestamp = 1646719200; // 
 	bool public hasWhitelistSaleStarted = true; //
 	string private _baseTokenURI = "http://api.lion/Metadata/"; //
 	address public treasury = 0x5279246E3626Cebe71a4c181382A50a71d2A4156; //
 
 	mapping (address => uint256) public hasMinted;
-
-    uint256 public whitelistSaleTimestamp = 1646719200; // 
 
 	// Events
 	// ------------------------------------------------------------------------
