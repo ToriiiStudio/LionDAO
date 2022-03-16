@@ -8,18 +8,18 @@ var adminClient = new faunadb.Client({
 
 async function main() {
 
-	let nftAddress = "0xEBc1c15FEC60437bCd369B22f6E585aD0C1558DE"; //
+	let nftAddress = "0x2241Ed0058392b34deFB548bb2Ec97FC84525Dfd"; //
 	let owner = new ethers.Wallet(process.env.RINKEBY_PRIVATE_KEY); //
 	let serial = 0;
 	let maxQuantity = 2;
-	let addressForClaim = ['0xdc41cde0eb46fd1a75040bcdd8ed8df045e28c20'];
+	let addressForClaim = ['0xbd42a2035d41b450ee7106c9f9c0c736fb546226','0xd56e7bcf62a417b821e6cf7ee16df7715a3e82ab', '0x7428f223f5ebd52419a0d56beb642cca23cc5946', '0x5279246e3626cebe71a4c181382a50a71d2a4156'];
 
 
 	for (let i = 0; i < addressForClaim.length; i++) {
 		const domain = {
 			name: 'LIONDAO',
 			version: '1.0.0',
-			chainId: 1,
+			chainId: 4,
 			verifyingContract: nftAddress
 		};
 
@@ -43,7 +43,7 @@ async function main() {
 		signature = await owner._signTypedData(domain, types, value);
 		console.log(signature);
 
-		var creat = await adminClient.query(q.Create(q.Ref(q.Collection('Claim'), serial + i), {
+		var creat = await adminClient.query(q.Create(q.Ref(q.Collection('Whitelist'), serial + i), {
 			data: {
 				address: addressForClaim[i],
 				maxNum: maxQuantity,
