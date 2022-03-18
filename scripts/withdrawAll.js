@@ -10,7 +10,7 @@ const NFT = artifacts.require("LionDAO");
 async function main() {
 
 
-  let nftAddress = "0x6D74bc185C563808B48a881D3b0c5C7BF5003f6B";//
+  let nftAddress = "0xD356DE76AC911C226C8A3196E1b1E716045582B2";
   let nft = await NFT.at(nftAddress);
 
   await nft.withdrawAll();

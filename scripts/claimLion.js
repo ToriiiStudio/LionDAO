@@ -10,7 +10,7 @@ const NFT = artifacts.require("LionDAO");
 
 async function main() {
 
-  let nftAddress = "0xEBc1c15FEC60437bCd369B22f6E585aD0C1558DE";
+  let nftAddress = "0xD356DE76AC911C226C8A3196E1b1E716045582B2";
   let nft = await NFT.at(nftAddress);
   // let chainId = await ethers.provider.getNetwork()
   let owner = new ethers.Wallet(process.env.RINKEBY_PRIVATE_KEY);

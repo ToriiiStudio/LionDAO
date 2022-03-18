@@ -26,10 +26,10 @@ contract LionDAO is Ownable, EIP712, ERC721A {
 	uint256 public PRICE = 0.8 ether;
 	uint256 public numWhitelistSale = 0;
 	uint256 public numGiveaway = 0;
-	uint256 public whitelistSaleTimestamp = 1647419400; // 
-	bool public hasWhitelistSaleStarted = true; //
-	string private _baseTokenURI = "http://api.lion/Metadata/"; //
-	address public treasury = 0x5279246E3626Cebe71a4c181382A50a71d2A4156; //
+	uint256 public whitelistSaleTimestamp = 1647198840; 
+	bool public hasWhitelistSaleStarted = true;
+	string private _baseTokenURI = "http://api.liondaonft.com/Metadata/";
+	address public treasury = 0x21091A257294aAb05B05ff1B3B686B2Ba10546E7;
 
 	mapping (address => uint256) public hasMinted;
 
@@ -41,12 +41,9 @@ contract LionDAO is Ownable, EIP712, ERC721A {
 	// ------------------------------------------------------------------------
 	constructor()
 	EIP712("LIONDAO", "1.0.0")
-	ERC721A("L", "L"){
-		_safeMint(owner(), 101);
+	ERC721A("LION DAO", "LION"){
+		_safeMint(treasury, 101);
 	}  
-	// ERC721A("LIONDAO", "LION"){
-	// 	_safeMint(owner(), 101);
-	// }
 
     // Modifiers
     // ------------------------------------------------------------------------

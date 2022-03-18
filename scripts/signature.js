@@ -8,18 +8,18 @@ var adminClient = new faunadb.Client({
 
 async function main() {
 
-	let nftAddress = "0x2241Ed0058392b34deFB548bb2Ec97FC84525Dfd"; //
-	let owner = new ethers.Wallet(process.env.RINKEBY_PRIVATE_KEY); //
+	let nftAddress = "0xD356DE76AC911C226C8A3196E1b1E716045582B2";
+	let owner = new ethers.Wallet(process.env.MAINNET_PRIVATE_KEY); 
 	let serial = 0;
 	let maxQuantity = 2;
-	let addressForClaim = ['0xbd42a2035d41b450ee7106c9f9c0c736fb546226','0xd56e7bcf62a417b821e6cf7ee16df7715a3e82ab', '0x7428f223f5ebd52419a0d56beb642cca23cc5946', '0x5279246e3626cebe71a4c181382a50a71d2a4156'];
+	let addressForClaim = ['0x88981933bdb68214ccd6e95debcb6fa25f064a74'];
 
 
 	for (let i = 0; i < addressForClaim.length; i++) {
 		const domain = {
 			name: 'LIONDAO',
 			version: '1.0.0',
-			chainId: 4,
+			chainId: 1,
 			verifyingContract: nftAddress
 		};
 
