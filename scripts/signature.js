@@ -10,10 +10,15 @@ async function main() {
 
 	let nftAddress = "0xD356DE76AC911C226C8A3196E1b1E716045582B2";
 	let owner = new ethers.Wallet(process.env.MAINNET_PRIVATE_KEY); 
-	let serial = 0;
+	let serial = 68;  // ok
 	let maxQuantity = 2;
-	let addressForClaim = ['0x88981933bdb68214ccd6e95debcb6fa25f064a74'];
+	let userAddress = [''];
+	let addressForClaim = [];
 
+	for (let i = 0; i < userAddress.length; i++) {
+		let lowerUserAddress = userAddress[i].toLowerCase();
+		addressForClaim.push(lowerUserAddress);
+	}
 
 	for (let i = 0; i < addressForClaim.length; i++) {
 		const domain = {
